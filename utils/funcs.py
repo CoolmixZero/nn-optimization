@@ -10,16 +10,16 @@ def train_loop(model: nn.Module, optimizer: optim.Optimizer, criterion: nn.Modul
 
     train_timeline = []
     for epoch in range(epochs):
-        batch_loss = 0
+        total_loss = 0
         for features, labels in train_data:
             preds = model(features)
             loss = criterion(preds, labels)
-            batch_loss += loss.detach()
+            total_loss += loss.detach()
 
             optimizer.zero_grad()
             loss.backward()
             optimizer.step()
-        train_timeline.append(batch_loss)
-        print(f'Epoch {epoch}: Batch Loss - {batch_loss}')
-        
-    return list
+        train_timeline.append(total_loss)
+        print(f'Epoch {epoch}: Batch Loss - {total_loss}')
+
+    return train_timeline
