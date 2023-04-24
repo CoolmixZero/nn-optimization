@@ -8,8 +8,8 @@ class Model1(nn.Module):
         self.fc1 = nn.Linear(in_features, 32)
         self.fc2 = nn.Linear(32, 64)
         self.fc3 = nn.Linear(64, 128)
-        self.fc4 = nn.Linear(128, 64)
-        self.fc5 = nn.Linear(64, 1)
+        self.fc4 = nn.Linear(128, 256)
+        self.fc5 = nn.Linear(256, 1)
     
     def forward(self, X: torch.Tensor) -> torch.Tensor:
         X = torch.relu(self.fc1(X))
