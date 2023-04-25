@@ -23,9 +23,8 @@ def train_loop(model: nn.Module, optimizer: optim.Optimizer, criterion: nn.Modul
             optimizer.step()
         train_timeline.append(total_loss)
 
-        if epoch % 40 == 0:
-            print(f'Epoch {epoch}: Batch Loss - {total_loss}')
-
+        print(f'Epoch {epoch}: Batch Loss - {total_loss}{" "*20}', end='\r')
+    print('\n')
     return train_timeline
 
 
@@ -42,7 +41,6 @@ def get_metrics(model: nn.Module, X: Tensor, y: Tensor) -> Tuple[float, ...]:
     precision = precision_score(y, get_preds(model, X))
     f1 = f1_score(y, get_preds(model, X))
 
-    print(f'Accuracy: {acc:.4f}\nRecall: {recall:.4f}\nPrecision: {precision:.4f}\nF1: {f1:.4f}')
     return acc, recall, precision, f1
 
 
@@ -65,6 +63,8 @@ def evaluate_model(model: nn.Module, train_loader: DataLoader,
 
     train_timeline = train_loop(model, optimizer, criterion, epochs, train_loader)
 
-    metrics = get_metrics(model, X_test, y_test)
+    acc, recall, precision, f1 = get_metrics(model, X_test, y_test)
+    print(f'Accuracy: {acc:.4f}\nRecall: {recall:.4f}\nPrecision: {precision:.4f}\nF1: {f1:.4f}')
+
     draw_learning_process(train_timeline)
     torch.save(model.state_dict(), f'models/{filename}.pt')
