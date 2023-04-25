@@ -1,0 +1,13 @@
+Criterion: BCELoss
+Optimizer: Adam
+Epochs: 1000
+Batches: 64 / shuffled
+Learning Rate: 1e-5
+
+Final Batch Loss: 5.623003959655762                     
+Accuracy: 0.8127
+Recall: 0.8425
+Precision: 0.7181
+F1: 0.7754
+
+Training Time: 49.9s

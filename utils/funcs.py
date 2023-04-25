@@ -55,11 +55,11 @@ def draw_learning_process(learning_timeline: list):
     plt.show()
 
 
-def evaluate_model(model: nn.Module, train_loader: DataLoader,
+def evaluate_model(model: nn.Module, train_loader: DataLoader, lr: float,
                    X_test: Tensor, y_test: Tensor, epochs: int, filename: str):
 
     criterion = nn.BCELoss()
-    optimizer = optim.Adam(model.parameters(), lr=0.001)
+    optimizer = optim.Adam(model.parameters(), lr=lr)
 
     train_timeline = train_loop(model, optimizer, criterion, epochs, train_loader)
 
