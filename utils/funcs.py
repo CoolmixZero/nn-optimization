@@ -64,7 +64,7 @@ def evaluate_model(model: nn.Module, train_loader: DataLoader,
     optimizer = optim.Adam(model.parameters(), lr=0.001)
 
     train_timeline = train_loop(model, optimizer, criterion, epochs, train_loader)
-    draw_learning_process(train_timeline)
 
     metrics = get_metrics(model, X_test, y_test)
+    draw_learning_process(train_timeline)
     torch.save(model.state_dict(), f'models/{filename}.pt')
