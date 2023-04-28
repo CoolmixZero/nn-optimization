@@ -6,6 +6,4 @@
 # from .model4_1 import Model4_1
 # from .model4_2 import Model4_2
 # from .model4_3 import Model4_3
-from .model4_1_1 import Model4_1_1
-from .model4_1_2 import Model4_1_2
-from .model4_1_3 import Model4_1_3
+from .best_model import Model4_1

@@ -31,7 +31,7 @@ def train_loop(model: nn.Module, optimizer: optim.Optimizer, criterion: nn.Modul
 def get_preds(model: nn.Module, X: Tensor, rounded: bool = True) -> Tensor:
     with torch.inference_mode():
         preds = model(X)
-    
+
     return torch.round(preds) if rounded else preds
 
 
@@ -61,10 +61,12 @@ def evaluate_model(model: nn.Module, train_loader: DataLoader, lr: float,
     criterion = nn.BCELoss()
     optimizer = optim.Adam(model.parameters(), lr=lr)
 
-    train_timeline = train_loop(model, optimizer, criterion, epochs, train_loader)
+    train_timeline = train_loop(
+        model, optimizer, criterion, epochs, train_loader)
 
     acc, recall, precision, f1 = get_metrics(model, X_test, y_test)
-    print(f'Accuracy: {acc:.4f}\nRecall: {recall:.4f}\nPrecision: {precision:.4f}\nF1: {f1:.4f}')
+    print(
+        f'Accuracy: {acc:.4f}\nRecall: {recall:.4f}\nPrecision: {precision:.4f}\nF1: {f1:.4f}')
 
     draw_learning_process(train_timeline)
     torch.save(model.state_dict(), f'models/{filename}.pt')
